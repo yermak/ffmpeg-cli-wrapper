@@ -435,38 +435,36 @@ public class FFmpegBuilderTest {
   }
 
   @Test
-  public void testFFmpegInputBuilder(){
-    String cmd = "-y -v info -f x11grab -s 1280x720 -r 30/1 -draw_mouse 0 -thread_queue_size 4096 -video_device_number 0 " +
-            "-i :0.0+0,0 -f alsa -thread_queue_size 4096 -video_device_number 0 -i hw:0,1,0 -f flv -acodec aac rtmp://a.rtmp.youtube.com/live2/XXX" ;
+  public void testFFmpegInputBuilder() {
+    String cmd =
+        "-y -v info -f x11grab -s 1280x720 -r 30/1 -draw_mouse 0 -thread_queue_size 4096 -video_device_number 0 "
+            + "-i :0.0+0,0 -f alsa -thread_queue_size 4096 -video_device_number 0 -i hw:0,1,0 -f flv -acodec aac rtmp://a.rtmp.youtube.com/live2/XXX";
     List<String> args =
-            new FFmpegBuilder()
+        new FFmpegBuilder()
             .overrideOutputFiles(true)
             .setVerbosity(FFmpegBuilder.Verbosity.INFO)
             .addInputStream(":0.0+0,0")
-              .setFormat("x11grab")
-              .addExtraArgs("-draw_mouse", "0")
-              .setVideoFrameRate(30)
-              .setVideoResolution("1280x720")
-              .setThreadQueueSize(4096)
-              .done()
+            .setFormat("x11grab")
+            .addExtraArgs("-draw_mouse", "0")
+            .setVideoFrameRate(30)
+            .setVideoResolution("1280x720")
+            .setThreadQueueSize(4096)
+            .done()
             .addInputStream("hw:0,1,0")
-              .setFormat("alsa")
-              .setThreadQueueSize(4096)
-              .done()
+            .setFormat("alsa")
+            .setThreadQueueSize(4096)
+            .done()
             .addOutput("rtmp://a.rtmp.youtube.com/live2/XXX")
-              .setAudioCodec("aac")
-              .setFormat("flv")
-              .done()
+            .setAudioCodec("aac")
+            .setFormat("flv")
+            .done()
             .build();
 
-    assertEquals(
-            ImmutableList.copyOf(parseCmd(cmd)),
-            args
-    );
+    assertEquals(ImmutableList.copyOf(parseCmd(cmd)), args);
   }
 
   //convenience method to parse commands into the immutable list assert form
-  private List<String> parseCmd(String cmd){
+  private List<String> parseCmd(String cmd) {
     return Arrays.asList(cmd.split(" "));
   }
 }

@@ -242,7 +242,7 @@ public class FFmpegBuilder {
     return output;
   }
 
-  public FFmpegInputBuilder addInputStream(String device){
+  public FFmpegInputBuilder addInputStream(String device) {
     FFmpegInputBuilder input = new FFmpegInputBuilder(this, device);
     inputStreams.add(input);
     return input;
@@ -282,9 +282,11 @@ public class FFmpegBuilder {
   public List<String> build() {
     ImmutableList.Builder<String> args = new ImmutableList.Builder<String>();
 
-    Preconditions.checkArgument(!inputs.isEmpty() || !inputStreams.isEmpty(), "At least one input must be specified");
-    Preconditions.checkArgument(!(!inputs.isEmpty() && !inputStreams.isEmpty()),
-            "Cannot specify both an input file/URI and an input device");
+    Preconditions.checkArgument(
+        !inputs.isEmpty() || !inputStreams.isEmpty(), "At least one input must be specified");
+    Preconditions.checkArgument(
+        !(!inputs.isEmpty() && !inputStreams.isEmpty()),
+        "Cannot specify both an input file/URI and an input device");
     Preconditions.checkArgument(!outputs.isEmpty(), "At least one output must be specified");
 
     args.add(override ? "-y" : "-n");
@@ -294,8 +296,8 @@ public class FFmpegBuilder {
       args.add("-user_agent", user_agent);
     }
 
-    if(inputs.isEmpty()){                           //build the input streams, using the AbstractFFmpegStreamBuilder
-      for(FFmpegInputBuilder inputStream: inputStreams){
+    if (inputs.isEmpty()) { //build the input streams, using the AbstractFFmpegStreamBuilder
+      for (FFmpegInputBuilder inputStream : inputStreams) {
         args.addAll(inputStream.build(this, pass));
       }
     }
@@ -316,7 +318,7 @@ public class FFmpegBuilder {
       args.add("-progress", progress.toString());
     }
 
-    if(!inputs.isEmpty()) args.addAll(extra_args);
+    if (!inputs.isEmpty()) args.addAll(extra_args);
 
     for (String input : inputs) {
       args.add("-i", input);
@@ -348,5 +350,4 @@ public class FFmpegBuilder {
 
     return args.build();
   }
-
 }

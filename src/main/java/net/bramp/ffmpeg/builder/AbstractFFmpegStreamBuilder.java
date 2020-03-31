@@ -114,7 +114,7 @@ public abstract class AbstractFFmpegStreamBuilder<T extends AbstractFFmpegStream
   }
 
   //used by input builders
-  protected AbstractFFmpegStreamBuilder(FFmpegBuilder parent){
+  protected AbstractFFmpegStreamBuilder(FFmpegBuilder parent) {
     this.parent = parent;
   }
 
