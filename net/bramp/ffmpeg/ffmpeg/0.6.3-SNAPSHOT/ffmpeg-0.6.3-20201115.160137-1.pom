@@ -557,7 +557,7 @@
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
                     <includes><include>**/*</include></includes>
                     <repositoryName>ffmpeg-cli-wrapper</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>yermak@gmail.com</repositoryOwner>    <!-- github username  -->
+                    <repositoryOwner>yermak</repositoryOwner>    <!-- github username  -->
                 </configuration>
                 <executions>
                     <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
